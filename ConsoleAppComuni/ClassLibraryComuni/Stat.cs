@@ -23,27 +23,21 @@ namespace ClassLibraryComuni
                 }
             }
 
-         //var regione =  context.MaxBy(pair => pair.Value.Count).Key;
+         //var regione =  context.MaxBy(x => x.Value.Count).Key;
 
             return regione;
         }
 
-        public void Duplicate(string path)
+        public List<(string,int)> Duplicate(string path)
         {
             using var data = new Data(path);
             data.Initialize();
-            var context = data.GetAll();
-            var myList = new Dictionary<string, int>();
-        
 
-            foreach (var item in context)
-            {
-                if (myList.ContainsKey(item.Key))
-                    myList[item.Key]++;
-                else myList.Add(item.Key,1);
+            return data.GetAll().SelectMany(x => x.Value)
+                .GroupBy(x => x)
+                .Where(group => group.Count() > 1)
+                .Select(group => ( group.Key,  group.Count() )).ToList();
 
-            }
-            
         }
     }
 }
