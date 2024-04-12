@@ -43,9 +43,6 @@ namespace ClassLibraryComuni.FileHelper
 
         public List<string> GetAllComunebyRegione(string regione) => _data[regione];
 
-
-
-
         public void Dispose()
         {
             _data.Clear();

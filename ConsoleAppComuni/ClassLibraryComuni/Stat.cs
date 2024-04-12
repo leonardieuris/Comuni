@@ -4,7 +4,6 @@ namespace ClassLibraryComuni
 {
     public class Stat
     {
-
         public string GetRegioneWithMoreComune(string path)
         {
             using var data = new Data(path);
